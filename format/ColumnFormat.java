@@ -1,4 +1,4 @@
-package org.kossine.ims.utility.exceltodb.format;
+package com.kossine.ims.utility.exceltodb.format;
 
 public class ColumnFormat {
 private String name;

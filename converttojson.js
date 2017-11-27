@@ -1,6 +1,7 @@
 const fs=require('fs')
 let format=[
 {
+index:0,
 name:"Laptop",
 columns:
 [{name:"laptopTag",type:"String"},
@@ -19,6 +20,7 @@ columns:
 ]
 },
 {
+index:1,
 name:"Adapter",
 columns:
 [{name:"adapterTag",type:"String"},

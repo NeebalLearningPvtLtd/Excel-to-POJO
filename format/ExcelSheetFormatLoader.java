@@ -1,4 +1,4 @@
-package org.kossine.ims.utility.exceltodb.format;
+package com.kossine.ims.utility.exceltodb.format;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -41,8 +41,6 @@ public class ExcelSheetFormatLoader {
 	 */
 	public List<SheetFormat> loadFromJson() throws JsonParseException, JsonMappingException, IOException  {
 			ObjectMapper mapper=new ObjectMapper();
-			List<SheetFormat> list = mapper.readValue(file,new TypeReference<List<SheetFormat>>() {});
-	
-		return list;
+			return mapper.readValue(file,new TypeReference<List<SheetFormat>>() {});
 	}
 }
