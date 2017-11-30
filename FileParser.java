@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.Future;
 
@@ -14,6 +15,7 @@ import javax.annotation.processing.FilerException;
 
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.scheduling.concurrent.ConcurrentTaskScheduler;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -53,15 +55,15 @@ public class FileParser {
 		List<SheetParser> sheetParsingTasks = new ArrayList<>();
 		List<Class<? extends Inventory>> pojoClasses = new ArrayList<>();
 		// package in which POJO resides
-		String prefix = "com.kossine.ims.models.";
-
+		Class<? extends Inventory> clazz;
 		for (final SheetFormat sf : sheetFormats) {
-			Class<? extends Inventory> clazz = InventoryFactory.getClazz(prefix + sf.getName());
+			clazz = InventoryFactory.getClazz(sf.getName());
+
 			if (clazz == null)
 				throw new SheetParsingException("Name of the Sheet doesnot match POJO Class Name");
 
 			sheetParsingTasks.add(new SheetParser(workbook.getSheetAt(sf.getIndex()), sf, clazz));
-			pojoClasses.add(clazz);
+
 		}
 		ForkJoinPool pool = new ForkJoinPool();
 
@@ -70,7 +72,13 @@ public class FileParser {
 		Map<Class<? extends Inventory>, List<Inventory>> map = new HashMap<>();
 
 		for (int i = 0; i < results.size(); i++)
-			map.put(pojoClasses.get(i), results.get(i).get());
+			try {
+				clazz = results.get(i).get().get(0).getClass();
+
+				map.put(clazz, results.get(i).get());
+			} catch (ExecutionException | InterruptedException e) {
+				e.printStackTrace();
+			}
 
 		return map;
 	}

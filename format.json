@@ -29,15 +29,15 @@
    },
    {
     "name": "warranty",
-    "type": "boolean"
+    "type": "Boolean"
    },
    {
     "name": "vt",
-    "type": "boolean"
+    "type": "Boolean"
    },
    {
     "name": "wifi",
-    "type": "boolean"
+    "type": "Boolean"
    },
    {
     "name": "ram",
@@ -83,7 +83,7 @@
    },
    {
     "name": "warranty",
-    "type": "boolean"
+    "type": "Boolean"
    },
    {
     "name": "supplier",

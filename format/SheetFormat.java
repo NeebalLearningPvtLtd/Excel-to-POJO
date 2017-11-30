@@ -33,7 +33,8 @@ public class SheetFormat {
 
 	@Override
 	public String toString() {
-		return "SheetFormat [name=" + name + ", columns=" + columns + "]";
+		return "SheetFormat [index=" + index + ", name=" + name + ", columns=" + columns + "]";
 	}
+	
 
 }

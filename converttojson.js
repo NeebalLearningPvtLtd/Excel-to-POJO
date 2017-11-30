@@ -10,9 +10,9 @@ columns:
 {name:"serialNum",type:"String"},
 {name:"batterySerialNum",type:"String"},
 {name:"dop",type:"LocalDate"},
-{name:"warranty",type:"boolean"},
-{name:"vt",type:"boolean"},
-{name:"wifi",type:"boolean"},
+{name:"warranty",type:"Boolean"},
+{name:"vt",type:"Boolean"},
+{name:"wifi",type:"Boolean"},
 {name:"ram",type:"String"},
 {name:"processor",type:"String"},
 {name:"hdd",type:"String"},
@@ -28,7 +28,7 @@ columns:
 {name:"modelNum",type:"String"},
 {name:"serialNum",type:"String"},
 {name:"dop",type:"LocalDate"},
-{name:"warranty",type:"boolean"},
+{name:"warranty",type:"Boolean"},
 {name:"supplier",type:"String"},
 ]
 }

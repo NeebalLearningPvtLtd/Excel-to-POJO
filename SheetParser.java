@@ -32,6 +32,7 @@ public class SheetParser implements Callable<List<Inventory>> {
 	public List<Inventory> call() throws SheetParsingException {
 		int rowStart = getStartRow(sheet);
 		int rowEnd = getLastRow(sheet);
+
 		for (int i = rowStart; i <= rowEnd; i++) {
 			Object obj = null;
 			try {
@@ -41,9 +42,9 @@ public class SheetParser implements Callable<List<Inventory>> {
 			}
 
 			rowParser.parseRow(sheet.getRow(i), sheetFormat, obj);
-//			 ? List<? extends Inventory > doesnot work for casting
+			// ? List<? extends Inventory > doesnot work for casting
 			list.add(clazz.cast(obj));
-			
+
 		}
 
 		return list;

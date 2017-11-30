@@ -11,16 +11,17 @@
 
 ### Note
 
-> It can be made work for both .xls and .xslx file format using together using [this](https://stackoverflow.com/a/11972571/8413082) .
+> It can used for both .xls and .xslx file format using together using [this](https://stackoverflow.com/a/11972571/8413082) .
 
 #### Usage
 *
-  *  Call [parseFile](./#) method of FileParser which takes excel File and [json](./#) format file of how the data will be mapped in POJO 
+  *  Call [parseFile](https://github.com/NeebalLearningPvtLtd/Excel-to-POJO/blob/master/FileParser.java) method of FileParser which takes excel File and [json](https://github.com/NeebalLearningPvtLtd/Excel-to-POJO/blob/master/format.json) format file of how the data will be mapped in POJO 
 
     ```java
-      File excelFile =new File('PATH of excel file');
+    
+      File excelFile =new File('Absolute PATH of excel file');
 
-      File JSONFormatFile =new File('PATH of JSON format file');
+      File JSONFormatFile =new File('Absolute PATH of JSON format file');
 
       FileParser fileParser = new FileParser(excelFile , JSONFormatFile ) ;
 
@@ -37,8 +38,14 @@
      > Inventory class is just common abstract class for all my POJO's .
 
 
- *  **Make** sure that name of [SheetFormat]() name and POJO Class Name , the [ColumnFormat]() name's and POJO's Fields name matches **exactly**  , else SheetParsingException and RowParsingException is raised respectively .
+ *  **Make** sure that name of [SheetFormat](https://github.com/NeebalLearningPvtLtd/Excel-to-POJO/blob/master/format/SheetFormat.java) name and POJO Class Name , the [ColumnFormat](https://github.com/NeebalLearningPvtLtd/Excel-to-POJO/blob/master/format/ColumnFormat.java) name's and POJO's Fields name matches **exactly**  , else SheetParsingException and RowParsingException is raised respectively .
   
   
- *  Excel Sheets can be read from any index  ( 0 based ) just provide index of the  Sheet in JSONFormatFile like [this]()
-
+ *  Excel Sheets can be read from any index  ( 0 based ) just provide index of the  Sheet in JSONFormatFile like [this](https://github.com/NeebalLearningPvtLtd/Excel-to-POJO/blob/master/format.json)
+ 
+#### Todo
+ 
+ * Formula evaluation to POJO field doesn't work. 
+ 
+##### License
+MIT
