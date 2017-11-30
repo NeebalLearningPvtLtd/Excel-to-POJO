@@ -2,7 +2,7 @@ package com.kossine.ims.utility.exceltodb;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,14 +11,9 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.Future;
 
-import javax.annotation.processing.FilerException;
-
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.springframework.scheduling.concurrent.ConcurrentTaskScheduler;
 
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.kossine.ims.models.Inventory;
 import com.kossine.ims.models.InventoryFactory;
 import com.kossine.ims.utility.exceltodb.exceptions.FileParsingException;
@@ -34,11 +29,11 @@ public class FileParser {
 	private Workbook workbook;
 	private List<SheetFormat> sheetFormats;
 
-	public FileParser(File excelFile, File formatFile) throws FilerException {
+	public FileParser(File excelFile, File formatFile) throws FileNotFoundException {
 
 		formatLoader = new ExcelSheetFormatLoader(formatFile);
 		if (!excelFile.exists() || !excelFile.getName().endsWith(".xlsx"))
-			throw new FilerException(excelFile + " does not exist");
+			throw new FileNotFoundException(excelFile + " does not exist");
 		this.excelFile = excelFile;
 		this.formatFile = formatFile;
 	}
