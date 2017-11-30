@@ -2,7 +2,7 @@
 
 
 #### Description
->This is utility used for parsing excel sheets data into java object used for Inventory Management System [here](./#) 
+>This is utility used for parsing excel sheets data into java object used for Inventory Management System [here](https://github.com/NeebalLearningPvtLtd/InventoryManagementSystem) 
 
 #### Dependencies
 > Jackson for json format to java format maven [link](https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core) .
