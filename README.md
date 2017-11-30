@@ -34,18 +34,18 @@
      * Key for the Map is the Class of the POJO . 
      * Value is List of all the POJO's that are read from row of corresponding sheets
 
-     #### Note 
+     **Note** 
      > Inventory class is just common abstract class for all my POJO's .
 
 
- *  **Make** sure that name of [SheetFormat](https://github.com/NeebalLearningPvtLtd/Excel-to-POJO/blob/master/format/SheetFormat.java) name and POJO Class Name , the [ColumnFormat](https://github.com/NeebalLearningPvtLtd/Excel-to-POJO/blob/master/format/ColumnFormat.java) name's and POJO's Fields name matches **exactly**  , else SheetParsingException and RowParsingException is raised respectively .
+ *  **Make** sure that name of [SheetFormat](https://github.com/NeebalLearningPvtLtd/Excel-to-POJO/blob/master/format/SheetFormat.java)'s name and POJO Class Name , the [ColumnFormat](https://github.com/NeebalLearningPvtLtd/Excel-to-POJO/blob/master/format/ColumnFormat.java)'s name and POJO's Fields name matches **exactly**  , else SheetParsingException and RowParsingException is raised respectively .
   
   
  *  Excel Sheets can be read from any index  ( 0 based ) just provide index of the  Sheet in JSONFormatFile like [this](https://github.com/NeebalLearningPvtLtd/Excel-to-POJO/blob/master/format.json)
  
 #### Todo
  
- * Formula evaluation to POJO field doesn't work. 
+>Formula evaluation to POJO field doesn't work. 
  
-##### License
-MIT
+#### License
+>MIT
