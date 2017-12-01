@@ -11,7 +11,7 @@
 
 ### Note
 
-> It can used for both .xls and .xslx file format using together using [this](https://stackoverflow.com/a/11972571/8413082) .
+> It can used for both .xls and .xslx file format together using [this](https://stackoverflow.com/a/11972571/8413082) .
 
 #### Usage
 *
