@@ -66,14 +66,33 @@ public class FileParser {
 
 		Map<Class<? extends Inventory>, List<Inventory>> map = new HashMap<>();
 
-		for (int i = 0; i < results.size(); i++)
-			try {
-				clazz = results.get(i).get().get(0).getClass();
+		int n = results.size();
+		for (int count = 0, i = 0; count < n;) {
 
-				map.put(clazz, results.get(i).get());
-			} catch (ExecutionException | InterruptedException e) {
-				e.printStackTrace();
-			}
+			if (results.get(i) != null && results.get(i).isDone()) {
+				count++;
+				try {
+					List<Inventory> list = results.get(i).get();
+					try {
+						clazz = list.get(0).getClass();
+						// allow duplicates
+						if (map.containsKey(clazz))
+							map.get(clazz).addAll(list);
+						else
+							map.put(clazz, list);
+						results.set(i, null);
+					} catch (IndexOutOfBoundsException e) {
+						System.err.println("Sheet " + sheetFormats.get(i).getIndex() + 1 + "/"
+								+ sheetFormats.get(i).getName() + " is empty");
+					}
+				} catch (ExecutionException | InterruptedException e) {
+					e.printStackTrace();
+				}
+
+			} else
+				i = (i + 1) % n;
+
+		}
 
 		return map;
 	}
