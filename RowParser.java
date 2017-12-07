@@ -27,7 +27,7 @@ public class RowParser {
 				try {
 					set(obj, field.getName(), getValue(cell, field.getType()));
 				} catch (CellParsingException e) {
-					throw new RowParsingException(e.getMessage() + " at row " + row.getRowNum());
+					throw new RowParsingException(e.getMessage() + " , at row " + row.getRowNum());
 				}
 			}
 	}
@@ -78,7 +78,7 @@ public class RowParser {
 			field.set(obj, o);
 		} catch (Exception e) {
 
-			throw new CellParsingException(e.getMessage() + " value of the cell is malformed");
+			throw new CellParsingException(e.getMessage() +" , value of the cell is malformed");
 		}
 
 	}
@@ -88,17 +88,19 @@ public class RowParser {
 			return "";
 		if (fieldType.equals("Boolean"))
 			return true;
+		if (fieldType.equals("Integer"))
+			return 0;
 		Class<?> clazz;
 		try {
 			clazz = Class.forName(fieldType);
 		} catch (ClassNotFoundException e) {
-			throw new CellParsingException(e.getMessage() + " class not found");
+			throw new CellParsingException(e.getMessage() + " , class not found");
 		}
 		Object value = null;
 		try {
 			value = clazz.newInstance();
 		} catch (InstantiationException | IllegalAccessException e) {
-			throw new CellParsingException(e.getMessage() + " " + fieldType + " cannot be instantionated");
+			throw new CellParsingException(e.getMessage() + " , " + fieldType + " cannot be instantionated");
 		}
 		return value;
 	}

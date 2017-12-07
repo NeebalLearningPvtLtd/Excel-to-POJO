@@ -59,6 +59,98 @@
  },
  {
   "index": 1,
+  "name": "Laptop",
+  "columns": [
+   {
+    "name": "laptopTag",
+    "type": "String"
+   },
+   {
+    "name": "brand",
+    "type": "String"
+   },
+   {
+    "name": "modelNum",
+    "type": "String"
+   },
+   {
+    "name": "serialNum",
+    "type": "String"
+   },
+   {
+    "name": "batterySerialNum",
+    "type": "String"
+   },
+   {
+    "name": "dop",
+    "type": "LocalDate"
+   },
+   {
+    "name": "warranty",
+    "type": "Boolean"
+   },
+   {
+    "name": "vt",
+    "type": "Boolean"
+   },
+   {
+    "name": "wifi",
+    "type": "Boolean"
+   },
+   {
+    "name": "ram",
+    "type": "String"
+   },
+   {
+    "name": "processor",
+    "type": "String"
+   },
+   {
+    "name": "hdd",
+    "type": "String"
+   },
+   {
+    "name": "supplier",
+    "type": "String"
+   }
+  ]
+ },
+ {
+  "index": 2,
+  "name": "Adapter",
+  "columns": [
+   {
+    "name": "adapterTag",
+    "type": "String"
+   },
+   {
+    "name": "brand",
+    "type": "String"
+   },
+   {
+    "name": "modelNum",
+    "type": "String"
+   },
+   {
+    "name": "serialNum",
+    "type": "String"
+   },
+   {
+    "name": "dop",
+    "type": "LocalDate"
+   },
+   {
+    "name": "warranty",
+    "type": "Boolean"
+   },
+   {
+    "name": "supplier",
+    "type": "String"
+   }
+  ]
+ },
+ {
+  "index": 3,
   "name": "Adapter",
   "columns": [
    {

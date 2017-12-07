@@ -10,6 +10,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 
 import com.kossine.ims.models.Inventory;
+import com.kossine.ims.utility.exceltodb.exceptions.RowParsingException;
 import com.kossine.ims.utility.exceltodb.exceptions.SheetParsingException;
 import com.kossine.ims.utility.exceltodb.format.SheetFormat;
 
@@ -40,11 +41,13 @@ public class SheetParser implements Callable<List<Inventory>> {
 			} catch (InstantiationException | IllegalAccessException e) {
 				throw new SheetParsingException(e.getMessage());
 			}
-
+			try {
 			rowParser.parseRow(sheet.getRow(i), sheetFormat, obj);
 			// ? List<? extends Inventory > doesnot work for casting
 			list.add(clazz.cast(obj));
-
+			}catch(RowParsingException e) {
+				System.err.println(e.getMessage()+" ,"+sheet.getSheetName());
+			}
 		}
 
 		return list;
