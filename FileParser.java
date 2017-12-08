@@ -1,4 +1,4 @@
-package com.kossine.ims.utility.exceltodb;
+package com.kossine.ims.utility.excel_to_pojo;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -16,10 +16,10 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import com.kossine.ims.models.Inventory;
 import com.kossine.ims.models.InventoryFactory;
-import com.kossine.ims.utility.exceltodb.exceptions.FileParsingException;
-import com.kossine.ims.utility.exceltodb.exceptions.SheetParsingException;
-import com.kossine.ims.utility.exceltodb.format.ExcelSheetFormatLoader;
-import com.kossine.ims.utility.exceltodb.format.SheetFormat;
+import com.kossine.ims.utility.excel_to_pojo.exceptions.FileParsingException;
+import com.kossine.ims.utility.excel_to_pojo.exceptions.SheetParsingException;
+import com.kossine.ims.utility.excel_to_pojo.format.ExcelSheetFormatLoader;
+import com.kossine.ims.utility.excel_to_pojo.format.SheetFormat;
 
 @SuppressWarnings("unused")
 public class FileParser {

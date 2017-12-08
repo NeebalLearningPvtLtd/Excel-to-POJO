@@ -1,4 +1,4 @@
-package com.kossine.ims.utility.exceltodb.exceptions;
+package com.kossine.ims.utility.excel_to_pojo.exceptions;
 
 @SuppressWarnings("serial")
 public class CellParsingException extends RowParsingException {

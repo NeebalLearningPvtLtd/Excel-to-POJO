@@ -1,4 +1,4 @@
-package com.kossine.ims.utility.exceltodb.format;
+package com.kossine.ims.utility.excel_to_pojo.format;
 
 import java.io.File;
 import java.io.FileNotFoundException;

@@ -1,4 +1,4 @@
-package com.kossine.ims.utility.exceltodb;
+package com.kossine.ims.utility.excel_to_pojo;
 
 import java.lang.reflect.Field;
 import java.time.LocalDate;
@@ -10,10 +10,10 @@ import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.usermodel.Row;
 
 import com.kossine.ims.models.Inventory;
-import com.kossine.ims.utility.exceltodb.exceptions.CellParsingException;
-import com.kossine.ims.utility.exceltodb.exceptions.RowParsingException;
-import com.kossine.ims.utility.exceltodb.format.ColumnFormat;
-import com.kossine.ims.utility.exceltodb.format.SheetFormat;
+import com.kossine.ims.utility.excel_to_pojo.exceptions.CellParsingException;
+import com.kossine.ims.utility.excel_to_pojo.exceptions.RowParsingException;
+import com.kossine.ims.utility.excel_to_pojo.format.ColumnFormat;
+import com.kossine.ims.utility.excel_to_pojo.format.SheetFormat;
 
 public class RowParser {
 

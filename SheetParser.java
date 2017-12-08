@@ -1,4 +1,4 @@
-package com.kossine.ims.utility.exceltodb;
+package com.kossine.ims.utility.excel_to_pojo;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -10,9 +10,9 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 
 import com.kossine.ims.models.Inventory;
-import com.kossine.ims.utility.exceltodb.exceptions.RowParsingException;
-import com.kossine.ims.utility.exceltodb.exceptions.SheetParsingException;
-import com.kossine.ims.utility.exceltodb.format.SheetFormat;
+import com.kossine.ims.utility.excel_to_pojo.exceptions.RowParsingException;
+import com.kossine.ims.utility.excel_to_pojo.exceptions.SheetParsingException;
+import com.kossine.ims.utility.excel_to_pojo.format.SheetFormat;
 
 public class SheetParser implements Callable<List<Inventory>> {
 	private Sheet sheet;
