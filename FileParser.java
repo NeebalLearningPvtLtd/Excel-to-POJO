@@ -29,8 +29,13 @@ public class FileParser {
 	private Workbook workbook;
 	private List<SheetFormat> sheetFormats;
 
+	
 	public FileParser(File excelFile, File formatFile) throws FileNotFoundException {
-
+		if(excelFile==null)
+			throw new FileNotFoundException("Excel file  doesnot exist , Exception at FileParser constructor");
+		if(formatFile==null)
+			throw new FileNotFoundException("Json format file  doesnot exist , Exception at FileParser constructor");
+		
 		formatLoader = new ExcelSheetFormatLoader(formatFile);
 		if (!excelFile.exists() || !excelFile.getName().endsWith(".xlsx"))
 			throw new FileNotFoundException(excelFile + " does not exist");
