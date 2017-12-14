@@ -8,7 +8,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ForkJoinPool;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 import org.apache.poi.ss.usermodel.Workbook;
@@ -29,13 +30,12 @@ public class FileParser {
 	private Workbook workbook;
 	private List<SheetFormat> sheetFormats;
 
-	
 	public FileParser(File excelFile, File formatFile) throws FileNotFoundException {
-		if(excelFile==null)
+		if (excelFile == null)
 			throw new FileNotFoundException("Excel file  doesnot exist , Exception at FileParser constructor");
-		if(formatFile==null)
+		if (formatFile == null)
 			throw new FileNotFoundException("Json format file  doesnot exist , Exception at FileParser constructor");
-		
+
 		formatLoader = new ExcelSheetFormatLoader(formatFile);
 		if (!excelFile.exists() || !excelFile.getName().endsWith(".xlsx"))
 			throw new FileNotFoundException(excelFile + " does not exist");
@@ -65,7 +65,7 @@ public class FileParser {
 			sheetParsingTasks.add(new SheetParser(workbook.getSheetAt(sf.getIndex()), sf, clazz));
 
 		}
-		ForkJoinPool pool = new ForkJoinPool();
+		ExecutorService pool = Executors.newFixedThreadPool(sheetParsingTasks.size() + 2);
 
 		List<Future<List<Inventory>>> results = pool.invokeAll(sheetParsingTasks);
 
