@@ -22,10 +22,8 @@ import com.kossine.ims.utility.excel_to_pojo.exceptions.SheetParsingException;
 import com.kossine.ims.utility.excel_to_pojo.format.ExcelSheetFormatLoader;
 import com.kossine.ims.utility.excel_to_pojo.format.SheetFormat;
 
-@SuppressWarnings("unused")
 public class FileParser {
 	private File excelFile;
-	private File formatFile;
 	private ExcelSheetFormatLoader formatLoader;
 	private Workbook workbook;
 	private List<SheetFormat> sheetFormats;
@@ -40,7 +38,6 @@ public class FileParser {
 		if (!excelFile.exists() || !excelFile.getName().endsWith(".xlsx"))
 			throw new FileNotFoundException(excelFile + " does not exist");
 		this.excelFile = excelFile;
-		this.formatFile = formatFile;
 	}
 
 	public Map<Class<? extends Inventory>, List<Inventory>> parseFile() throws Exception {
@@ -53,7 +50,7 @@ public class FileParser {
 			throw new FileParsingException("format number of sheets is greater than excel number of sheets");
 
 		List<SheetParser> sheetParsingTasks = new ArrayList<>();
-		List<Class<? extends Inventory>> pojoClasses = new ArrayList<>();
+
 		// package in which POJO resides
 		Class<? extends Inventory> clazz;
 		for (final SheetFormat sf : sheetFormats) {
