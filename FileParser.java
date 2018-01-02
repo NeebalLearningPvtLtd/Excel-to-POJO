@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +15,8 @@ import java.util.concurrent.Future;
 
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.kossine.ims.models.Inventory;
 import com.kossine.ims.models.InventoryFactory;
@@ -27,7 +30,7 @@ public class FileParser {
 	private ExcelSheetFormatLoader formatLoader;
 	private Workbook workbook;
 	private List<SheetFormat> sheetFormats;
-
+	private static final Logger log=LoggerFactory.getLogger(FileParser.class);
 	public FileParser(File excelFile, File formatFile) throws FileNotFoundException {
 		if (excelFile == null)
 			throw new FileNotFoundException("Excel file  doesnot exist , Exception at FileParser constructor");
@@ -58,9 +61,8 @@ public class FileParser {
 
 			if (clazz == null)
 				throw new SheetParsingException("Name of the Sheet doesnot match POJO Class Name");
-
 			sheetParsingTasks.add(new SheetParser(workbook.getSheetAt(sf.getIndex()), sf, clazz));
-
+		
 		}
 		ExecutorService pool = Executors.newFixedThreadPool(sheetParsingTasks.size() + 2);
 
@@ -84,11 +86,13 @@ public class FileParser {
 							map.put(clazz, list);
 						results.set(i, null);
 					} catch (IndexOutOfBoundsException e) {
-						System.err.println("Sheet " + sheetFormats.get(i).getIndex() + 1 + "/"
+						log.warn("Sheet " + sheetFormats.get(i).getIndex() + 1 + "/"
 								+ sheetFormats.get(i).getName() + " is empty");
 					}
-				} catch (ExecutionException | InterruptedException e) {
-					e.printStackTrace();
+				} catch (ExecutionException | InterruptedException | NullPointerException ex ) {
+					List<String> errors = new ArrayList<String>();
+					Arrays.stream(ex.getStackTrace()).forEach(e->errors.add(e.toString()));
+					log.error("error in parsing excel file  at : {}" , errors);
 				}
 
 			} else

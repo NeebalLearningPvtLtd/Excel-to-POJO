@@ -8,6 +8,8 @@ import java.util.concurrent.Callable;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.kossine.ims.models.Inventory;
 import com.kossine.ims.utility.excel_to_pojo.exceptions.RowParsingException;
@@ -20,7 +22,7 @@ public class SheetParser implements Callable<List<Inventory>> {
 	private List<Inventory> list;
 	private RowParser rowParser;
 	private Class<? extends Inventory> clazz;
-
+	private static final Logger log=LoggerFactory.getLogger(SheetParser.class);
 	SheetParser(Sheet sheet, SheetFormat sheetFormat, Class<? extends Inventory> clazz) {
 		this.sheet = sheet;
 		this.sheetFormat = sheetFormat;
@@ -33,7 +35,6 @@ public class SheetParser implements Callable<List<Inventory>> {
 	public List<Inventory> call() throws SheetParsingException {
 		int rowStart = getStartRow(sheet);
 		int rowEnd = getLastRow(sheet);
-
 		for (int i = rowStart; i <= rowEnd; i++) {
 			Object obj = null;
 			try {
@@ -46,7 +47,7 @@ public class SheetParser implements Callable<List<Inventory>> {
 			// ? List<? extends Inventory > doesnot work for casting
 			list.add(clazz.cast(obj));
 			}catch(RowParsingException e) {
-				System.err.println(e.getMessage()+" ,"+sheet.getSheetName());
+				log.warn(e.getMessage()+" ,"+sheet.getSheetName());
 			}
 		}
 
