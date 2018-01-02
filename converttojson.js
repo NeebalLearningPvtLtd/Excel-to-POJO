@@ -21,6 +21,19 @@ columns:
 },
 {
 index:1,
+name:"Adapter",
+columns:
+[{name:"adapterTag",type:"String"},
+{name:"brand",type:"String"},
+{name:"modelNum",type:"String"},
+{name:"serialNum",type:"String"},
+{name:"dop",type:"LocalDate"},
+{name:"warranty",type:"Boolean"},
+{name:"supplier",type:"String"}]
+}
+,
+{
+index:2,
 name:"Laptop",
 columns:
 [{name:"laptopTag",type:"String"},
@@ -38,7 +51,7 @@ columns:
 {name:"supplier",type:"String"}]
 },
 {
-index:2,
+index:3,
 name:"Adapter",
 columns:
 [{name:"adapterTag",type:"String"},
@@ -51,16 +64,57 @@ columns:
 }
 ,
 {
-index:3,
-name:"Adapter",
-columns:
-[{name:"adapterTag",type:"String"},
-{name:"brand",type:"String"},
-{name:"modelNum",type:"String"},
-{name:"serialNum",type:"String"},
-{name:"dop",type:"LocalDate"},
-{name:"warranty",type:"Boolean"},
-{name:"supplier",type:"String"}]
+index:4,
+name:"Pc",
+columns:[{name:"pcTag",type:"String"}]
+}
+,
+{
+	index:5,
+	name:"Monitor",
+	columns:[{name:"monitorTag",type:"String"}]
+}
+,
+{
+	index:6,
+	name:"MotherBoard",
+	columns:[{name:"motherBoardTag",type:"String"}]
+}
+,
+{
+	index:7,
+	name:"Hdd",
+	columns:[{name:"hddTag",type:"String"}]
+}
+,
+{
+	index:8,
+	name:"Ram",
+	columns:[{name:"ramTag",type:"String"}]
+}
+,
+{
+	index:9,
+	name:"PowerSupply",
+	columns:[{name:"powerSupplyTag",type:"String"}]
+}
+,
+{
+	index:10,
+	name:"Mouse",
+	columns:[
+	{name:"mouseTag",type:"String"},
+	{name:"brand" , type:"String"},
+	{name:"serialNum" , type:"String"},
+	{name:"connType" , type:"String"},
+	{name:"location" , type:"String"},
+	]
+}
+,
+{
+	index:11,
+	name:"KeyBoard",
+	columns:[{name:"keyBoardTag",type:"String"}]
 }
 ]
 
