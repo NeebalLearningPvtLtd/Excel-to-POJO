@@ -99,7 +99,7 @@ public class FileParser {
 				i = (i + 1) % n;
 
 		}
-
+		pool.shutdown();
 		return map;
 	}
 
