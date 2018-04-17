@@ -9,13 +9,12 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.usermodel.Row;
 
-import com.kossine.ims.models.Inventory;
 import com.kossine.ims.utility.excel_to_pojo.exceptions.CellParsingException;
 import com.kossine.ims.utility.excel_to_pojo.exceptions.RowParsingException;
 import com.kossine.ims.utility.excel_to_pojo.format.ColumnFormat;
 import com.kossine.ims.utility.excel_to_pojo.format.SheetFormat;
 
-public class RowParser {
+public class RowParser<T extends U, U> {
 
 	public void parseRow(Row row, SheetFormat sf, Object obj) throws RowParsingException {
 
@@ -69,7 +68,7 @@ public class RowParser {
 
 	private void set(Object obj, String fieldName, Object o) throws CellParsingException {
 		@SuppressWarnings("unchecked")
-		Class<? extends Inventory> clazz = (Class<? extends Inventory>) obj.getClass();
+		Class<T> clazz = (Class<T>) obj.getClass();
 		Field field = null;
 
 		try {

@@ -11,32 +11,31 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.kossine.ims.models.Inventory;
 import com.kossine.ims.utility.excel_to_pojo.exceptions.RowParsingException;
 import com.kossine.ims.utility.excel_to_pojo.exceptions.SheetParsingException;
 import com.kossine.ims.utility.excel_to_pojo.format.SheetFormat;
 
-public class SheetParser implements Callable<List<Inventory>> {
+public class SheetParser<T extends U, U> implements Callable<List<T>> {
 	private Sheet sheet;
 	private SheetFormat sheetFormat;
-	private List<Inventory> list;
-	private RowParser rowParser;
-	private Class<? extends Inventory> clazz;
+	private List<T> list;
+	private RowParser<T,U> rowParser;
+	private Class<T> clazz;
 	private static final Logger log=LoggerFactory.getLogger(SheetParser.class);
-	SheetParser(Sheet sheet, SheetFormat sheetFormat, Class<? extends Inventory> clazz) {
+	SheetParser(Sheet sheet, SheetFormat sheetFormat, Class<T> clazz) {
 		this.sheet = sheet;
 		this.sheetFormat = sheetFormat;
 		this.clazz = clazz;
-		rowParser = new RowParser();
+		rowParser = new RowParser<>();
 		list = new ArrayList<>();
 	}
 
 	@Override
-	public List<Inventory> call() throws SheetParsingException {
+	public List<T> call() throws SheetParsingException {
 		int rowStart = getStartRow(sheet);
 		int rowEnd = getLastRow(sheet);
 		for (int i = rowStart; i <= rowEnd; i++) {
-			Object obj = null;
+			T obj = null;
 			try {
 				obj = clazz.newInstance();
 			} catch (InstantiationException | IllegalAccessException e) {
@@ -45,7 +44,8 @@ public class SheetParser implements Callable<List<Inventory>> {
 			try {
 			rowParser.parseRow(sheet.getRow(i), sheetFormat, obj);
 			// ? List<? extends Inventory > doesnot work for casting
-			list.add(clazz.cast(obj));
+			
+			list.add(obj);
 			}catch(RowParsingException e) {
 				log.warn(e.getMessage()+" ,"+sheet.getSheetName());
 			}
