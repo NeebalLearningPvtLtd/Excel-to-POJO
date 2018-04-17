@@ -18,13 +18,12 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.kossine.ims.models.Inventory;
 import com.kossine.ims.models.InventoryFactory;
 import com.kossine.ims.utility.excel_to_pojo.exceptions.FileParsingException;
 import com.kossine.ims.utility.excel_to_pojo.format.ExcelSheetFormatLoader;
 import com.kossine.ims.utility.excel_to_pojo.format.SheetFormat;
 
-public class FileParser<T> {
+public class FileParser<U> {
 	private File excelFile;
 	private ExcelSheetFormatLoader formatLoader;
 	private Workbook workbook;
@@ -43,7 +42,7 @@ public class FileParser<T> {
 	}
 
 	@SuppressWarnings("unchecked")
-	public Map<Class<? extends T>, List<T>> parseFile() throws Exception {
+	public <T extends U> Map<Class<T>, List<T>> parseFile() throws Exception {
 
 		sheetFormats = formatLoader.loadFromJson();
 		workbook = new XSSFWorkbook(new FileInputStream(excelFile));
@@ -52,27 +51,27 @@ public class FileParser<T> {
 		if (workbook.getNumberOfSheets() < sheetFormats.size())
 			throw new FileParsingException("format number of sheets is greater than excel number of sheets");
 
-		List<SheetParser<? extends T,T>> sheetParsingTasks = new ArrayList<>();
+		List<SheetParser<T,U>> sheetParsingTasks = new ArrayList<>();
 		
 		// package in which POJO resides
-		Class<? extends T> clazz;
+		Class<T> clazz;
 		for (final SheetFormat sf : sheetFormats) {
-			clazz = (Class<? extends T>) InventoryFactory.getClazz(sf.getName());
+			clazz = (Class<T>) InventoryFactory.getClazz(sf.getName());
 
 			if (clazz == null) {
 				log.warn("Name of the Sheet :"+sf.getName()+" doesnot match POJO Class");
 				continue;
 			}
-			SheetParser<? extends T,T> sheetParser = new SheetParser<>(workbook.getSheetAt(sf.getIndex()), sf, clazz);
+			SheetParser<T,U> sheetParser = new SheetParser<>(workbook.getSheetAt(sf.getIndex()), sf, clazz);
 			sheetParsingTasks.add(sheetParser);
 		
 		}
 		ExecutorService pool = Executors.newFixedThreadPool(sheetParsingTasks.size() + 2);
 
 		
-		List<Future<List<Inventory>>> results =(List<Future<List<Inventory>>>)(List<?>)pool.invokeAll(sheetParsingTasks);
+		List<Future<List<T>>> results = pool.invokeAll(sheetParsingTasks);
 
-		Map<Class<? extends T>, List<T>> map = new HashMap<>();
+		Map<Class<T>, List<T>> map = new HashMap<>();
 
 		int n = results.size();
 		for (int count = 0, i = 0; count < n;) {
@@ -80,14 +79,14 @@ public class FileParser<T> {
 			if (results.get(i) != null && results.get(i).isDone()) {
 				count++;
 				try {
-					List<T> list = (List<T>) results.get(i).get();
+					List<T> list = results.get(i).get();
 					try {
-						clazz = (Class<? extends T>) list.get(0).getClass();
+						clazz = (Class<T>) list.get(0).getClass();
 						// allow duplicates
 						if (map.containsKey(clazz))
 							map.get(clazz).addAll(list);
 						else
-							map.put((Class<? extends T>) clazz, list);
+							map.put(clazz, list);
 						results.set(i, null);
 					} catch (IndexOutOfBoundsException e) {
 						log.warn("Sheet " + sheetFormats.get(i).getIndex() + 1 + "/"
