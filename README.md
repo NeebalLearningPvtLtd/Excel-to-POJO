@@ -29,7 +29,7 @@
 
     ```
 
-  * It returns Map< Class<? extends T> , list<? extends T> of POJO's
+  * It returns Map< Class<? extends T> , list<? extends T> > of POJO's
 
      * Key for the Map is the Class of the POJO . 
      * Value is List of all the POJO's that are read from row of corresponding sheets
