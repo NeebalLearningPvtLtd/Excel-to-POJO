@@ -29,14 +29,14 @@
 
     ```
 
-  * It returns Map of <? extends T> and list<T> of POJO's
+  * It returns Map< Class<? extends T> , list<? extends T> of POJO's
 
      * Key for the Map is the Class of the POJO . 
      * Value is List of all the POJO's that are read from row of corresponding sheets
 
      **Note** 
-     > T for in mine case is Inventory class which is common abstract class for all my POJO's .
-
+     > T in my case is Inventory class which is common abstract class for all my POJO's .
+    
 
  *  **Make** sure that name of [SheetFormat](https://github.com/NeebalLearningPvtLtd/Excel-to-POJO/blob/master/format/SheetFormat.java)'s name and POJO Class Name , the [ColumnFormat](https://github.com/NeebalLearningPvtLtd/Excel-to-POJO/blob/master/format/ColumnFormat.java)'s name and POJO's Fields name matches **exactly**  , else SheetParsingException and RowParsingException is raised respectively .
   
