@@ -53,7 +53,7 @@ public class FileParser<U> {
 
 		List<SheetParser<T,U>> sheetParsingTasks = new ArrayList<>();
 		
-		// package in which POJO resides
+		
 		Class<T> clazz;
 		for (final SheetFormat sf : sheetFormats) {
 			clazz = (Class<T>) InventoryFactory.getClazz(sf.getName());
@@ -87,10 +87,12 @@ public class FileParser<U> {
 							map.get(clazz).addAll(list);
 						else
 							map.put(clazz, list);
-						results.set(i, null);
+						
 					} catch (IndexOutOfBoundsException e) {
 						log.warn("Sheet " + sheetFormats.get(i).getIndex() + 1 + "/"
 								+ sheetFormats.get(i).getName() + " is empty");
+					}finally{
+						results.set(i, null);
 					}
 				} catch (ExecutionException | InterruptedException | NullPointerException ex ) {
 					List<String> errors = new ArrayList<String>();
