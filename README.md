@@ -43,9 +43,6 @@
   
  *  Excel Sheets can be read from any index  ( 0 based ) just provide index of the  Sheet in JSONFormatFile like [this](https://github.com/NeebalLearningPvtLtd/Excel-to-POJO/blob/master/format.json)
  
-#### Todo
- 
->Formula evaluation to POJO field doesn't work. 
  
 #### License
 >MIT
